@@ -96,14 +96,14 @@ char seconds_s[5], minutes_s[5], hours_s[5];
 //Channel Select (Parameter 1 byte)
 #define  CHANNEL_SELECT_CMD             (0XC3)
 
-#define  CHANNEL_0_CODE             (0XF0)
-#define  CHANNEL_1_CODE             (0XE1)
-#define  CHANNEL_2_CODE             (0XD2)
-#define  CHANNEL_3_CODE             (0XC3)
-#define  CHANNEL_4_CODE             (0XB4)
-#define  CHANNEL_5_CODE             (0XA5)
-#define  CHANNEL_6_CODE             (0X96)
-#define  CHANNEL_7_CODE             (0X87)
+#define  CHANNEL_0             (0XF0)
+#define  CHANNEL_1             (0XE1)
+#define  CHANNEL_2             (0XD2)
+#define  CHANNEL_3             (0XC3)
+#define  CHANNEL_4             (0XB4)
+#define  CHANNEL_5             (0XA5)
+#define  CHANNEL_6             (0X96)
+#define  CHANNEL_7             (0X87)
 
 #define  CHANNEL_0_RETURN           (0XB8)
 #define  CHANNEL_1_RETURN           (0XB1)
@@ -187,14 +187,14 @@ void DS2482_Test()
 
     DS2482_Write_Two_Byte(WRITE_CONFIGURATION_CMD,0xF0);
 
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_0_CODE);
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_1_CODE);
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_2_CODE);
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_3_CODE);
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_4_CODE);
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_5_CODE);
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_6_CODE);
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_7_CODE);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_0);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_1);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_2);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_3);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_4);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_5);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_6);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_7);
 
     DS2482_Write_Two_Byte(OW_SINGLE_BIT_CMD,0x80);
 
@@ -204,7 +204,7 @@ void DS2482_Test()
 
     uint8_t temp;
 
-    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_1_CODE);
+    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_1);
     DS2482_Write_Two_Byte(SET_READ_POINTER_CMD,CONFIGURATION_REGISTER_PTR);
     DS2482_Read_Byte(&temp);
 if (temp == 0xF0)
@@ -271,6 +271,8 @@ int main(void)
 	    float temp;
 	    char temp_s[10];
 
+	    DS2482_Write_Two_Byte(CHANNEL_SELECT_CMD,CHANNEL_0);
+	    HAL_Delay(1);
 
 	    DS2482_Write_One_Byte(OW_RESET_CMD);
 	    HAL_Delay(1);
