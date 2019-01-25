@@ -1,0 +1,29 @@
+
+#n/** Configure pins as #n #t#t #t* Analog #n #t#t #t* Input #n #t#t #t* Output#n #t#t #t* EVENT_OUT#n #t#t #t* EXTI
+*/
+static void MX_GPIO_Init(void)
+{
+#n
+#tGPIO_InitTypeDef GPIO_InitStruct;
+#n#t/* GPIO Ports Clock Enable */
+#t__HAL_RCC_GPIOC_CLK_ENABLE();
+#t__HAL_RCC_GPIOD_CLK_ENABLE();
+#t__HAL_RCC_GPIOB_CLK_ENABLE();
+#t__HAL_RCC_GPIOA_CLK_ENABLE();
+#n#t/*Configure GPIO pin Output Level */
+#tHAL_GPIO_WritePin(OLED_VCC_GPIO_Port, OLED_VCC_Pin, GPIO_PIN_SET);
+#n#t/*Configure GPIO pin Output Level */
+#tHAL_GPIO_WritePin(OLED_GND_GPIO_Port, OLED_GND_Pin, GPIO_PIN_RESET);
+#n#t/*Configure GPIO pin : LED_STATUS_Pin */
+#tGPIO_InitStruct.Pin = LED_STATUS_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+#tGPIO_InitStruct.Pull = GPIO_PULLDOWN;
+#tHAL_GPIO_Init(LED_STATUS_GPIO_Port, &GPIO_InitStruct);
+#n#t/*Configure GPIO pins : OLED_VCC_Pin OLED_GND_Pin */
+#tGPIO_InitStruct.Pin = OLED_VCC_Pin|OLED_GND_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+#tGPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+#tHAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+#n
+}
+#n
